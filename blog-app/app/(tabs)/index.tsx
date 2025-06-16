@@ -1,5 +1,8 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import { Text, TextInput, Button, StyleSheet, View } from 'react-native';
+
+
 
 export default function HomeScreen() {
   // let textInput: string;
@@ -11,12 +14,26 @@ export default function HomeScreen() {
     title: "",
     content: ""
   });
+
   const [posts, setPosts] = useState([{
     author: "", 
     title: "", 
     content: ""
   }]);
  
+
+    const loadPosts = async () => {
+    (await AsyncStorage.getAllKeys()).forEach(async key => {
+      let newPostString = await AsyncStorage.getItem(key);
+      if (newPostString) {
+        const newPost = JSON.parse(newPostString);
+        setPosts([...posts, newPost]);
+      }
+    })
+  }
+
+  loadPosts();
+
 
   // async function addPost() {
 
@@ -26,6 +43,7 @@ export default function HomeScreen() {
     if (!author || !title || !content) return;
     const newPost = {author, title, content}
     setPosts([newPost, ...posts]);
+    await AsyncStorage.setItem(title, JSON.stringify(newPost));
     setAuthor("");
     setTitle("");
     setContent("");
@@ -33,13 +51,13 @@ export default function HomeScreen() {
 
 
   return (
-    <div>
+    <View>
       {posts.map(post => (
-      <div style={styles.postTitle}>
+      <View key={post.title}>
       <Text>{post.author}</Text>
       <Text style={styles.postTitle}>{post.title}</Text>
       <Text>{post.content}</Text>
-      </div>
+      </View>
       ))}
 
 
@@ -63,7 +81,7 @@ export default function HomeScreen() {
     onChangeText={setContent}
     />
     <Button title="Submit" onPress={addPost}/>
-    </div>
+    </View>
   )
 }
 
