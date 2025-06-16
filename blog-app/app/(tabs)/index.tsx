@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, TextInput, Button } from 'react-native';
+import { Text, TextInput, Button, StyleSheet, View } from 'react-native';
 
 export default function HomeScreen() {
   // let textInput: string;
@@ -35,9 +35,9 @@ export default function HomeScreen() {
   return (
     <div>
       {posts.map(post => (
-      <div>
+      <div style={styles.postTitle}>
       <Text>{post.author}</Text>
-      <Text>{post.title}</Text>
+      <Text style={styles.postTitle}>{post.title}</Text>
       <Text>{post.content}</Text>
       </div>
       ))}
@@ -49,11 +49,12 @@ export default function HomeScreen() {
     value={author}
     onChangeText={setAuthor}
     />
-        <Text>Title:</Text>
+    <Text>Title:</Text>
     <TextInput 
     placeholder='Title'
     value={title}
     onChangeText={setTitle}
+    // style={styles.postTitle}
     />
         <Text>Content:</Text>
     <TextInput 
@@ -65,5 +66,15 @@ export default function HomeScreen() {
     </div>
   )
 }
+
+const styles = StyleSheet.create({
+  postTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  viewStyle: {
+    backgroundColor: 'blue'
+  }
+})
 
 
