@@ -5,7 +5,7 @@ import { Text, TextInput, Button, StyleSheet, View } from 'react-native';
 
 import "@/global.css"
 import indexStyles from './index-styles';
-import Post from '@/components/post';
+import Post from '@/components/Post';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -81,6 +81,9 @@ export default function HomeScreen() {
     value={content}
     onChangeText={setContent}
     />
+    <View>
+      {/* <Image source={uri: "@/assets/images/react-logo.png"}></Image> */}
+    </View>
     <Button title="Submit" onPress={addPost}/>
     <Button title="Third Page" onPress={() => router.push("/third_page")}/>
     </View>

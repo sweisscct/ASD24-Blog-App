@@ -45,6 +45,9 @@ async function getData() {
 
     console.log(res.data.latitude);
     console.log(res.data)
+    console.log(new Date())
+    console.log(new Date('2025-06-20T13:00'))
+    console.log(new Date() < new Date('2025-06-20T13:00'))
 }
 
 
