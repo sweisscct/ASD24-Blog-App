@@ -3,7 +3,9 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Text, TextInput, Button, StyleSheet, View } from 'react-native';
 
-
+import "@/global.css"
+import indexStyles from './index-styles';
+import Post from '@/components/post';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -56,11 +58,7 @@ export default function HomeScreen() {
   return (
     <View>
       {posts.map(post => (
-      <View key={post.title}>
-      <Text>{post.author}</Text>
-      <Text style={styles.postTitle}>{post.title}</Text>
-      <Text>{post.content}</Text>
-      </View>
+        <Post post={post}></Post>
       ))}
 
 
@@ -75,7 +73,7 @@ export default function HomeScreen() {
     placeholder='Title'
     value={title}
     onChangeText={setTitle}
-    // style={styles.postTitle}
+    style={indexStyles.postTitle}
     />
         <Text>Content:</Text>
     <TextInput 
@@ -89,14 +87,6 @@ export default function HomeScreen() {
   )
 }
 
-const styles = StyleSheet.create({
-  postTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  viewStyle: {
-    backgroundColor: 'blue'
-  }
-})
+
 
 

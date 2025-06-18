@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { Text, TextInput, Button, StyleSheet, View } from 'react-native';
-
+import "@/global.css"
 export default function Page3() {
   // let textInput: string;
  
 
   return (
-    <Text>Welcome to the third page</Text>
- 
+    
+    <View className="flex-1 items-center justify-center bg-green">
+      <Text>Welcome to the third page</Text>
+      <Text className="text-xl font-bold text-blue-500">
+        Welcome to Nativewind!
+      </Text>
+    </View> 
   )
 }
 
