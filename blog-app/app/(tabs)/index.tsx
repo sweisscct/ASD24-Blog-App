@@ -1,10 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Text, TextInput, Button, StyleSheet, View } from 'react-native';
 
 
 
 export default function HomeScreen() {
+  const router = useRouter();
+
   // let textInput: string;
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
@@ -32,7 +35,7 @@ export default function HomeScreen() {
     })
   }
 
-  loadPosts();
+  // loadPosts();
 
 
   // async function addPost() {
@@ -81,6 +84,7 @@ export default function HomeScreen() {
     onChangeText={setContent}
     />
     <Button title="Submit" onPress={addPost}/>
+    <Button title="Third Page" onPress={() => router.push("/third_page")}/>
     </View>
   )
 }
