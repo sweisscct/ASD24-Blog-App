@@ -1,11 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Text, TextInput, Button, StyleSheet, View } from 'react-native';
+import { Text, TextInput, Button, StyleSheet, View, Image, FlatList, ScrollView } from 'react-native';
 
 import "@/global.css"
 import indexStyles from './index-styles';
 import Post from '@/components/Post';
+// import { ScrollView } from 'react-native-reanimated/lib/typescript/Animated';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -21,9 +22,9 @@ export default function HomeScreen() {
   });
 
   const [posts, setPosts] = useState([{
-    author: "", 
-    title: "", 
-    content: ""
+    author: "Default Author", 
+    title: "Unoriginal Title", 
+    content: "Boring content"
   }]);
  
 
@@ -35,7 +36,7 @@ export default function HomeScreen() {
         setPosts([...posts, newPost]);
       }
     })
-  }
+    }
 
   // loadPosts();
 
@@ -56,10 +57,8 @@ export default function HomeScreen() {
 
 
   return (
-    <View>
-      {posts.map(post => (
-        <Post post={post}></Post>
-      ))}
+    <ScrollView>
+<View>
 
 
     <Text>Author:</Text>
@@ -82,11 +81,27 @@ export default function HomeScreen() {
     onChangeText={setContent}
     />
     <View>
-      {/* <Image source={uri: "@/assets/images/react-logo.png"}></Image> */}
+      <Image source={require("@/assets/images/react-logo.png")}/>
     </View>
     <Button title="Submit" onPress={addPost}/>
     <Button title="Third Page" onPress={() => router.push("/third_page")}/>
+
+    <FlatList
+    data={posts}
+    renderItem={( {item} ) => (
+      <Post post={item}></Post>
+    )}
+    ItemSeparatorComponent={() => <View className="w-4"/>}
+    className='flex-1'
+    >
+
+    </FlatList>
+      {/* {posts.map(post => (
+        <Post post={post}></Post>
+      ))}       */}
+
     </View>
+        </ScrollView>
   )
 }
 
